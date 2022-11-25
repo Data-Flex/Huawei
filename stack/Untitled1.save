@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+
+int main () {
+
+    FILE *onegin = NULL;
+    char fileinput [30] = "";
+    
+    return 0;
+}

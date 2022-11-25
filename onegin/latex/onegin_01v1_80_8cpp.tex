@@ -1,0 +1,100 @@
+\hypertarget{onegin_01v1_80_8cpp}{}\doxysection{onegin v1.0.cpp File Reference}
+\label{onegin_01v1_80_8cpp}\index{onegin v1.0.cpp@{onegin v1.0.cpp}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structstr__info}{str\+\_\+info}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{onegin_01v1_80_8cpp_ad8594f134c0015c6cc5ed3bc356025fb}{Bubble\+Sort}} (\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$list\+\_\+info, int length, int($\ast$\mbox{\hyperlink{onegin_01v1_80_8cpp_a6e962a2108b49c3031109b6544ea4802}{Structcmp}})(\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$a, \mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$b))
+\item 
+int \mbox{\hyperlink{onegin_01v1_80_8cpp_a6e962a2108b49c3031109b6544ea4802}{Structcmp}} (\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$a, \mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$b)
+\item 
+int \mbox{\hyperlink{onegin_01v1_80_8cpp_a2188dcdde0806bc7690a96fb7d593e42}{Structrcmp}} (\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$a, \mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$b)
+\begin{DoxyCompactList}\small\item\em tim is zsr \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{onegin_01v1_80_8cpp_a4ba09f8fd6ba8ee77ab5fe69447cabcb}{Find\+\_\+numbers\+\_\+or\+\_\+latters}} (char $\ast$index, size\+\_\+t len)
+\item 
+char $\ast$ \mbox{\hyperlink{onegin_01v1_80_8cpp_a7822ba044221fa7d85a4ab6ab9fcfd9f}{RFind\+\_\+numbers\+\_\+or\+\_\+latters}} (char $\ast$index)
+\item 
+void \mbox{\hyperlink{onegin_01v1_80_8cpp_a95a1cbb699e8151decfa213b54f9f7e6}{finding\+\_\+num\+\_\+of\+\_\+strings}} (char $\ast$buf, int size, int $\ast$num\+\_\+of\+\_\+strings)
+\item 
+void \mbox{\hyperlink{onegin_01v1_80_8cpp_a110bac0e9fa0241752be225673b829f3}{generation\+\_\+list\+\_\+info}} (char $\ast$buf, int size, \mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$list\+\_\+info)
+\item 
+int \mbox{\hyperlink{onegin_01v1_80_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\item 
+char $\ast$ \mbox{\hyperlink{onegin_01v1_80_8cpp_a0077cbda43d87629d40271b918b13dd1}{Find\+\_\+numbers\+\_\+or\+\_\+letters}} (char $\ast$index)
+\item 
+char $\ast$ \mbox{\hyperlink{onegin_01v1_80_8cpp_a585927e1836e76d74400b5d14bfee0d7}{RFind\+\_\+numbers\+\_\+or\+\_\+letters}} (char $\ast$index, size\+\_\+t len)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_ad8594f134c0015c6cc5ed3bc356025fb}\label{onegin_01v1_80_8cpp_ad8594f134c0015c6cc5ed3bc356025fb}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!BubbleSort@{BubbleSort}}
+\index{BubbleSort@{BubbleSort}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{BubbleSort()}{BubbleSort()}}
+{\footnotesize\ttfamily void Bubble\+Sort (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{list\+\_\+info,  }\item[{int}]{length,  }\item[{int($\ast$)(\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$a, \mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$b)}]{Structcmp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a4ba09f8fd6ba8ee77ab5fe69447cabcb}\label{onegin_01v1_80_8cpp_a4ba09f8fd6ba8ee77ab5fe69447cabcb}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!Find\_numbers\_or\_latters@{Find\_numbers\_or\_latters}}
+\index{Find\_numbers\_or\_latters@{Find\_numbers\_or\_latters}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{Find\_numbers\_or\_latters()}{Find\_numbers\_or\_latters()}}
+{\footnotesize\ttfamily char$\ast$ Find\+\_\+numbers\+\_\+or\+\_\+latters (\begin{DoxyParamCaption}\item[{char $\ast$}]{index,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a0077cbda43d87629d40271b918b13dd1}\label{onegin_01v1_80_8cpp_a0077cbda43d87629d40271b918b13dd1}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!Find\_numbers\_or\_letters@{Find\_numbers\_or\_letters}}
+\index{Find\_numbers\_or\_letters@{Find\_numbers\_or\_letters}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{Find\_numbers\_or\_letters()}{Find\_numbers\_or\_letters()}}
+{\footnotesize\ttfamily char$\ast$ Find\+\_\+numbers\+\_\+or\+\_\+letters (\begin{DoxyParamCaption}\item[{char $\ast$}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a95a1cbb699e8151decfa213b54f9f7e6}\label{onegin_01v1_80_8cpp_a95a1cbb699e8151decfa213b54f9f7e6}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!finding\_num\_of\_strings@{finding\_num\_of\_strings}}
+\index{finding\_num\_of\_strings@{finding\_num\_of\_strings}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{finding\_num\_of\_strings()}{finding\_num\_of\_strings()}}
+{\footnotesize\ttfamily void finding\+\_\+num\+\_\+of\+\_\+strings (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{size,  }\item[{int $\ast$}]{num\+\_\+of\+\_\+strings }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a110bac0e9fa0241752be225673b829f3}\label{onegin_01v1_80_8cpp_a110bac0e9fa0241752be225673b829f3}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!generation\_list\_info@{generation\_list\_info}}
+\index{generation\_list\_info@{generation\_list\_info}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{generation\_list\_info()}{generation\_list\_info()}}
+{\footnotesize\ttfamily void generation\+\_\+list\+\_\+info (\begin{DoxyParamCaption}\item[{char $\ast$}]{buf,  }\item[{int}]{size,  }\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{list\+\_\+info }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{onegin_01v1_80_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!main@{main}}
+\index{main@{main}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a7822ba044221fa7d85a4ab6ab9fcfd9f}\label{onegin_01v1_80_8cpp_a7822ba044221fa7d85a4ab6ab9fcfd9f}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!RFind\_numbers\_or\_latters@{RFind\_numbers\_or\_latters}}
+\index{RFind\_numbers\_or\_latters@{RFind\_numbers\_or\_latters}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{RFind\_numbers\_or\_latters()}{RFind\_numbers\_or\_latters()}}
+{\footnotesize\ttfamily char$\ast$ RFind\+\_\+numbers\+\_\+or\+\_\+latters (\begin{DoxyParamCaption}\item[{char $\ast$}]{index }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a585927e1836e76d74400b5d14bfee0d7}\label{onegin_01v1_80_8cpp_a585927e1836e76d74400b5d14bfee0d7}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!RFind\_numbers\_or\_letters@{RFind\_numbers\_or\_letters}}
+\index{RFind\_numbers\_or\_letters@{RFind\_numbers\_or\_letters}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{RFind\_numbers\_or\_letters()}{RFind\_numbers\_or\_letters()}}
+{\footnotesize\ttfamily char$\ast$ RFind\+\_\+numbers\+\_\+or\+\_\+letters (\begin{DoxyParamCaption}\item[{char $\ast$}]{index,  }\item[{size\+\_\+t}]{len }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a6e962a2108b49c3031109b6544ea4802}\label{onegin_01v1_80_8cpp_a6e962a2108b49c3031109b6544ea4802}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!Structcmp@{Structcmp}}
+\index{Structcmp@{Structcmp}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{Structcmp()}{Structcmp()}}
+{\footnotesize\ttfamily int Structcmp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{onegin_01v1_80_8cpp_a2188dcdde0806bc7690a96fb7d593e42}\label{onegin_01v1_80_8cpp_a2188dcdde0806bc7690a96fb7d593e42}} 
+\index{onegin v1.0.cpp@{onegin v1.0.cpp}!Structrcmp@{Structrcmp}}
+\index{Structrcmp@{Structrcmp}!onegin v1.0.cpp@{onegin v1.0.cpp}}
+\doxysubsubsection{\texorpdfstring{Structrcmp()}{Structrcmp()}}
+{\footnotesize\ttfamily int Structrcmp (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{a,  }\item[{\mbox{\hyperlink{structstr__info}{str\+\_\+info}} $\ast$}]{b }\end{DoxyParamCaption})}
+
+
+
+tim is zsr 
+

@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+
+
+struct cpu {
+
+    int* code = {};
+    stack
+
+int main() {
+
+    FILE *input = NULL;
+    char fileinput [30] = "";
+    
+    fgets (fileinput, sizeof(fileinput), stdin);//origin.txt
+    fileinput[strlen(fileinput) - 1] = '\0';
+    input = fopen (fileinput, "rb");
+    
+    int size = 0;
+    struct stat st = {0};
+    stat (fileinput, &st);
+    size = st.st_size;
+    
+    int* code = (int *) calloc (size, sizeof (int));
+    fread (code, sizeof (int), size, input);
+    
+    return 0;
+}

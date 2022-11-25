@@ -1,0 +1,275 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+
+struct str_info {
+
+        char* start;
+
+        size_t len;
+    };
+
+void MySort(str_info* list_info, int length, int (*Structcmp) (str_info* a, str_info* b));
+
+int Structcmp  (str_info* a, str_info* b);
+
+int Structrcmp (str_info* a, str_info* b);
+
+char* Find_numbers_or_letters  (char* index);
+
+char* RFind_numbers_or_letters (char* index, size_t len);
+
+int process_buffer (char* buf, int size);
+
+str_info* generation_list_ (char* buf, int size, int num_of_strings);
+
+void printlist (str_info* list, int num_of_strings, FILE *output);
+
+
+
+void Structcheck (str_info* a);
+
+
+
+int main() {
+
+    FILE *onegin = NULL;
+    char fileinput [30] = "";
+
+    FILE *output = NULL;
+    char fileoutput [30] = "";
+
+    int size = 0;
+
+    fgets (fileinput, sizeof(fileinput), stdin);//testtext.txt    Pushkin_-_Eugene_Onegin.txt
+    fileinput[strlen(fileinput) - 1] = '\0';
+    onegin = fopen (fileinput, "rb");
+
+    fgets (fileoutput, sizeof(fileoutput), stdin);
+    fileoutput[strlen(fileoutput) - 1] = '\0';
+    output = fopen (fileoutput, "w");
+
+    struct stat st = {0};
+    stat (fileinput, &st);
+    size = st.st_size;
+
+    char* buf = (char *) calloc ((size + 2), sizeof (char));
+    fread (buf, sizeof (char), size, onegin);
+
+
+    int num_of_strings = process_buffer (buf, size);
+
+
+    str_info* list_origin = generation_list_ (buf, size, num_of_strings);
+    str_info* list_sort   = generation_list_ (buf, size, num_of_strings);
+    str_info* list_rsort  = generation_list_ (buf, size, num_of_strings);
+
+
+    MySort (list_sort, num_of_strings, Structcmp);
+
+    printlist (list_sort, num_of_strings, output);
+
+
+    MySort (list_rsort, num_of_strings, Structrcmp);
+
+    printlist (list_rsort, num_of_strings, output);
+
+
+    printlist (list_origin, num_of_strings, output);
+
+}
+
+
+
+void MySort(str_info* list_info, int length, int (*Structcmp) (str_info* a, str_info* b)) {
+
+  for (int i = 0; i < length ; i++){
+
+    for (int j = length - 1; j > i; j--){
+
+      str_info* list_info_j= list_info + j;
+      str_info* list_info_j_1= list_info + j - 1;
+
+      if (Structcmp (list_info_j, list_info_j_1)) {
+
+        str_info copy  = *list_info_j;
+
+        *list_info_j = *list_info_j_1;
+
+        *list_info_j_1 = copy;
+      }
+    }
+  }
+}
+
+
+
+int Structcmp (str_info* a, str_info* b) {
+
+    char* Aindex = Find_numbers_or_letters (a -> start);
+    char* Bindex = Find_numbers_or_letters (b -> start);
+    char* Amax = RFind_numbers_or_letters (a -> start + a -> len, a -> len);
+    char* Bmax = RFind_numbers_or_letters (b -> start + b -> len, b -> len);
+
+    if      ((a -> len) == 0) return 0;
+    else if ((b -> len) == 0) return 1;
+
+    for (; (Aindex <= Amax) && (Bindex <= Bmax) && (*Aindex == *Bindex); Aindex++, Bindex++);
+
+
+    if (Aindex > Amax || *Aindex < *Bindex) return 1;
+
+    return 0;
+}
+
+
+
+
+
+void Structcheck (str_info* a) {
+
+    char* Aindex = RFind_numbers_or_letters (a -> start + a -> len, a -> len);
+    char* Amin   =  Find_numbers_or_letters (a -> start);
+
+    for (char* i = Amin; i<= Aindex; i++) printf ("%c", *i);
+    printf ("\n");
+}
+
+
+
+
+
+
+
+//! tim is zsr
+
+int Structrcmp (str_info* a, str_info* b) {
+
+    char* Aindex = RFind_numbers_or_letters (a -> start + a -> len, a -> len);
+    char* Bindex = RFind_numbers_or_letters (b -> start + b -> len, b -> len);
+    char* Amin = Find_numbers_or_letters (a -> start);
+    char* Bmin = Find_numbers_or_letters (b -> start);
+
+
+    if      ((a -> len) == 0) return 0;
+    else if ((b -> len) == 0) return 1;
+
+    for (; (Aindex >= Amin) && (Bindex >= Bmin) && (*Aindex == *Bindex); Aindex--, Bindex--);
+
+    if (Aindex == Amin || *Aindex < *Bindex) return 1;
+
+    return 0;
+}
+
+
+
+char* Find_numbers_or_letters (char* index) {
+
+    while (!((*index >= 'a' && *index <= 'z') || (*index >= 'A' && *index <= 'Z') || (*index >= '0' && *index <= '9') || (*index == '\0'))) index++;
+
+    return index;
+}
+
+
+
+char* RFind_numbers_or_letters (char* index, size_t len) {
+
+    while (!((*index >= 'a' && *index <= 'z') || (*index >= 'A' && *index <= 'Z') || (*index >= '0' && *index <= '9') || (*index == '\0') || (len <= 0))) index--,len--;
+
+    return index;
+}
+
+
+
+int process_buffer (char* buf, int size) {
+
+    int num_of_strings = 0;
+
+    for (int i = 0; i < size; i++) {
+
+        if (*(buf + i) == '\n') {
+
+            *(buf + i) = '\0';
+
+            num_of_strings ++;
+        }
+
+        else if (*(buf + i) == '\r') *(buf + i) = '\n';
+    }
+
+    num_of_strings ++;
+
+    *(buf + size) = '\n';
+    *(buf + size + 1) = '\0';
+
+    return num_of_strings;
+}
+
+
+
+//void generation_list (char* buf, int size, str_info* list_info) {
+//
+//    int j = 0, last_i = 0;
+//
+//    str_info* list_info
+//
+//    list_info[j].start = buf;
+//
+//
+//    for (int i = 0; i < size; i++) {
+//
+//        if (*(buf + i) == '\n') {
+//
+//            list_info[j].len = i - last_i;
+//
+//            j++;
+//
+//            list_info[j].start = buf + i + 2;
+//
+//            last_i = i + 2;
+//
+//        }
+//    }
+//
+//    list_info[j].len = size - last_i;
+//}
+
+
+str_info* generation_list_ (char* buf, int size, int num_of_strings) {
+
+    int j = 0, last_i = 0;
+
+    str_info* list_info = (str_info *) calloc (num_of_strings, sizeof (str_info));
+
+    list_info[j].start = buf;
+
+
+    for (int i = 0; i < size; i++) {
+
+        if (*(buf + i) == '\n') {
+
+            list_info[j].len = i - last_i;
+
+            j++;
+
+            list_info[j].start = buf + i + 2;
+
+            last_i = i + 2;
+
+        }
+    }
+
+    list_info[j].len = size - last_i;
+
+    return list_info;
+}
+
+void printlist(str_info* list, int num_of_strings, FILE *output) {
+
+    for (int i = 0; i < num_of_strings; i++) {
+
+        fprintf (output, "%s", list[i].start);
+    }
+}
+

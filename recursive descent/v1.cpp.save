@@ -1,0 +1,148 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+
+void getdata (FILE **input, FILE **output, int *size, char **buf);
+
+int getsize (char* fileinput);
+
+
+
+const char* s = NULL;
+
+
+
+int main() {
+
+    FILE *input = NULL;
+    FILE *output = NULL;
+
+    int size = 0;
+    char *buf = NULL;
+
+    getdata (&input, &output, &size, &buf);
+
+    s = buf;
+
+
+
+    return 0;
+}
+
+
+
+void getdata (FILE **input, FILE **output, int *size, char **buf) {
+
+    char fileinput [namelen] = "";
+    char fileoutput [namelen] = "";
+
+    fgets (fileinput, sizeof(fileinput), stdin);//origin.txt
+    fileinput[strlen(fileinput) - 1] = '\0';
+    *input = fopen (fileinput, "rb");
+
+    fgets (fileoutput, sizeof(fileoutput), stdin);//asmres.txt
+    fileoutput[strlen(fileoutput) - 1] = '\0';
+    *output = fopen (fileoutput, "wb");
+
+    *size = getsize (fileinput);
+
+    *buf = (char *) calloc ((*size + 1), sizeof (char));
+    fread (*buf, sizeof (char), *size, *input);
+}
+
+
+
+int getsize (char* fileinput) {
+
+    struct stat st = {0};
+
+    stat (fileinput, &st);
+
+    return st.st_size;
+}
+
+
+
+int GetG (const char* str) {
+
+    s = str;
+    
+    int val = GetE();
+    
+    assert (*s == '\0');
+    
+    return val;
+}
+
+
+
+int GetE () {
+
+    int val = GetT();
+    
+    while (*s == '+' || *s == '-') {
+    
+        char op = *s;
+        
+        s++;
+        
+        int val2 = GetT();
+        
+        if (op == '+') val += val2;
+        
+        else           val -= val2;
+    }
+    
+    return val;
+}
+
+
+
+int GetT () {
+
+    
+}
+
+
+
+int GetP () {
+
+    int val = 0;
+    
+    if (*s == '(') {
+    
+        s++;
+        
+        int val2 = GetE();
+        
+        assert (*s == ')');
+        
+        s++;
+    }
+    
+    else val = GetN();
+    
+    return val;
+}
+
+
+
+int GetN () {
+
+    int val = 0;
+
+    const char* sOLD = s;
+
+    while ('0' <= *s && *s <= '9') {
+
+        val = val*10 + *s - '0';
+
+        s++;
+    }
+
+    assert (s > sOLD);
+
+    return val;
+}

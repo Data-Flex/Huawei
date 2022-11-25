@@ -1,0 +1,231 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+
+struct str_info {
+
+        char* start;
+
+        size_t len;
+    };
+
+void BubbleSort(str_info* list_info, int length, int (*Structcmp) (str_info* a, str_info* b));
+
+int Structcmp  (str_info* a, str_info* b);
+
+int Structrcmp (str_info* a, str_info* b);
+
+char* Find_numbers_or_latters  (char* index);
+
+char* RFind_numbers_or_latters (char* index);
+
+void finding_num_of_strings (char* buf, int size, int* num_of_strings);
+
+void generation_list_info   (char* buf, int size, str_info* list_info);
+
+
+
+int main() {
+
+    FILE *onegin = NULL;
+    char filename [30] = "";
+    int size = 0, num_of_strings = 0;
+
+    gets (filename); //testtext.txt    Pushkin_-_Eugene_Onegin.txt
+    onegin = fopen (filename, "rb");
+
+    struct stat st = {0};
+    stat (filename, &st);
+    size = st.st_size;
+
+    char* buf = (char *) calloc ((size + 2), sizeof (char));
+    fread (buf, sizeof (char), size, onegin);
+
+
+
+    finding_num_of_strings (buf, size, &num_of_strings);
+
+
+
+    str_info* list_info_origin = (str_info *) calloc (num_of_strings, sizeof (str_info));
+    str_info* list_info_sort   = (str_info *) calloc (num_of_strings, sizeof (str_info));
+    str_info* list_info_rsort  = (str_info *) calloc (num_of_strings, sizeof (str_info));
+
+
+    generation_list_info (buf, size, list_info_origin);
+
+
+    for (int i = 0; i < num_of_strings; i++) {
+
+        list_info_sort[i] = list_info_origin[i];
+
+        list_info_rsort[i] = list_info_origin[i];
+    }
+
+
+    BubbleSort (list_info_sort, num_of_strings, Structcmp);
+
+    for (int i = 0; i < num_of_strings; i++) {
+
+        printf ("%s", list_info_sort[i].start);
+    }
+
+
+    printf ("\n\n\n\n\n");
+
+
+    BubbleSort (list_info_rsort, num_of_strings, Structrcmp);
+
+    for (int i = 0; i < num_of_strings; i++) {
+
+        printf ("%s", list_info_rsort[i].start);
+    }
+
+
+    printf ("\n\n\n\n\n");
+
+
+    for (int i = 0; i < num_of_strings; i++) {
+
+        printf ("%s", list_info_origin[i].start);
+    }
+}
+
+
+
+void BubbleSort(str_info* list_info, int length, int (*Structcmp) (str_info* a, str_info* b)) {
+
+  for (int i = 0; i < length ; i++){
+
+    for (int j = length - 1; j > i; j--){
+
+      str_info* list_info_j= list_info + j;
+      str_info* list_info_i= list_info + i;
+
+      if (Structcmp (list_info_i, list_info_j)) {
+
+        str_info g  = *list_info_i;
+
+        *list_info_i = *list_info_j;
+
+        *list_info_j = g;
+      }
+    }
+  }
+}
+
+
+
+int Structcmp (str_info* a, str_info* b) {
+
+    char* Aindex = a -> start;
+    char* Bindex = b -> start;
+
+    Find_numbers_or_latters (Aindex);
+
+    Find_numbers_or_latters (Bindex);
+
+    char* Amax = a -> start + a -> len;
+    char* Bmax = b -> start + b -> len;
+
+    RFind_numbers_or_latters (Amax);
+
+    RFind_numbers_or_latters (Bmax);
+
+    for (; (*Aindex == *Bindex) && (Aindex < Amax) && (Bindex < Bmax); Aindex++, Bindex++);
+
+    if (*Aindex > *Bindex || Aindex == Amax) return 1;
+
+    return 0;
+}
+
+
+int Structrcmp (str_info* a, str_info* b) {
+
+    char* Aindex = a -> start + a -> len;
+    char* Bindex = b -> start + b -> len;
+
+    RFind_numbers_or_latters (Aindex);
+
+    RFind_numbers_or_latters (Bindex);
+
+    char* Amin = a -> start;
+    char* Bmin = b -> start;
+
+    Find_numbers_or_latters (Amin);
+
+    Find_numbers_or_latters (Bmin);
+
+    for (; (*Aindex == *Bindex) && (Aindex > Amin) && (Bindex > Bmin); Aindex--, Bindex--);
+
+    if (*Aindex > *Bindex || Aindex == Amin) return 1;
+
+    return 0;
+}
+
+
+
+char* Find_numbers_or_latters (char* index) {
+
+    while (!((*index >= 'a' && *index <= 'z') || (*index >= 'A' && *index <= 'Z') || (*index >= '0' && *index <= '9'))) index++;
+
+    return index;
+}
+
+
+
+char* RFind_numbers_or_latters (char* index) {
+
+    while (!((*index >= 'a' && *index <= 'z') || (*index >= 'A' && *index <= 'Z') || (*index >= '0' && *index <= '9'))) index--;
+
+    return index;
+}
+
+
+
+void finding_num_of_strings (char* buf, int size, int* num_of_strings) {
+
+    for (int i = 0; i < size; i++) {
+
+        if (*(buf + i) == '\n') {
+
+            *(buf + i) = '\0';
+
+            (*num_of_strings) ++;
+        }
+
+        else if (*(buf + i) == '\r') *(buf + i) = '\n';
+    }
+
+    (*num_of_strings) ++;
+
+    *(buf + size) = '\n';
+    *(buf + size + 1) = '\0';
+}
+
+
+
+void generation_list_info (char* buf, int size, str_info* list_info) {
+
+    int j = 0, last_i = 0;
+
+    list_info[j].start = buf;
+
+
+    for (int i = 0; i < size; i++) {
+
+        if (*(buf + i) == '\n') {
+
+            list_info[j].len = i - last_i;
+
+            j++;
+
+            list_info[j].start = buf + i + 2;
+
+            last_i = i + 2;
+
+        }
+    }
+
+    list_info[j].len = size - last_i;
+}
