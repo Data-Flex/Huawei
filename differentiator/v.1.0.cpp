@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-enum type {num = 0, var = 1, op = 2};
+enum type {num = 0, var = 1, oper = 2};
 
 enum op {add = '+', sub = '-', mul = '*', divi = '/'};
 
@@ -178,7 +178,7 @@ void fill_node_value (TreeNode *node, char *newdata) {
 
     else if (*newdata == '+' || *newdata == '-' || *newdata == '*' || *newdata == '/') {
 
-        node -> TYPE = op;
+        node -> TYPE = oper;
 
 //        if (*newdata == '+') node -> value = add;
 //
@@ -188,7 +188,7 @@ void fill_node_value (TreeNode *node, char *newdata) {
 //
 //        else if (*newdata == '/') node -> value = divi;
 
-        node -> value = *newdata;
+        node -> value = (op) *newdata;
     }
 
     else if (*newdata <= '9' && *newdata >= '0') {

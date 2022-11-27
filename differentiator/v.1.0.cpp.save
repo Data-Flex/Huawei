@@ -5,7 +5,7 @@
 
 enum type {num = 0, var = 1, op = 2};
 
-enum op {add = 43, sub = 45, mul = 42, divi = 47};
+enum op {add = '+', sub = '-', mul = '*', divi = '/'};
 
 struct TreeNode {
 
@@ -173,22 +173,22 @@ void fill_node_value (TreeNode *node, char *newdata) {
 
         node -> varvalue = *newdata;
 
-        printf ("var \n");
+        //printf ("var \n");
     }
 
     else if (*newdata == '+' || *newdata == '-' || *newdata == '*' || *newdata == '/') {
 
         node -> TYPE = op;
 
-        if (*newdata == '+') node -> value = add;
+//        if (*newdata == '+') node -> value = add;
+//
+//        else if (*newdata == '-') node -> value = sub;
+//
+//        else if (*newdata == '*') node -> value = mul;
+//
+//        else if (*newdata == '/') node -> value = divi;
 
-        else if (*newdata == '-') node -> value = sub;
-
-        else if (*newdata == '*') node -> value = mul;
-
-        else if (*newdata == '/') node -> value = divi;
-
-        printf ("op \n");
+        node -> value = (op) *newdata;
     }
 
     else if (*newdata <= '9' && *newdata >= '0') {
@@ -197,7 +197,7 @@ void fill_node_value (TreeNode *node, char *newdata) {
 
         sscanf (newdata, "%lf", &(node -> numvalue));
 
-        printf ("num \n");
+        //printf ("num \n");
     }
 
     else printf ("Error with creation of node. Inputed value is not operable\n");
@@ -222,16 +222,16 @@ TreeNode* readtree (char *buf, TreeNode *root, int *index) {
 
     node = create_node (root, node, buf + *index);
 
+
+
     double trash = 0;
     int len = 0;
 
     sscanf (buf + *index, "%lf%n", &trash, &len);
 
-    printf ("%lf %d \n", trash, len);
+    if (len) (*index) += len - 1;
 
-    printf ("%d \n", *index + len);
 
-    (*index) += len;
 
 
     if (buf[*index + 2] == '(') {
