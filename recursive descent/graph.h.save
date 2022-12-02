@@ -1,0 +1,42 @@
+
+
+
+void Graph (Node *node, FILE *output);
+
+void Graph_tree (Node *node, FILE *output);
+
+
+
+
+void Graph (Node *node, FILE *output) {
+
+    fprintf (output, "digraph G\n");
+    fprintf (output, "{\n");
+
+    Graph_tree (node, output);
+
+    fprintf (output, "}\n");
+
+}
+
+
+
+
+void Graph_tree (Node *node, FILE *output) {
+
+
+    if (node -> TYPE == num) fprintf (output, "%d[label = \"%d\"];", (int) node, node -> numvalue);
+
+    else if (node -> TYPE == oper) fprintf (output, "%d[label = \"%c\"];", (int) node, (char) (node -> value));
+
+    else if (node -> TYPE == var) fprintf (output, "%d[label = \"%c\"];", (int) node, node -> varvalue);
+    
+    if (node -> parent != NULL) fprintf (output, "%d[label = \"%c\"];", (int) node, node -> varvalue);
+
+    while (node -> left != NULL) {
+    
+        Graph_tree (node -> left; output);
+    }
+
+}
+

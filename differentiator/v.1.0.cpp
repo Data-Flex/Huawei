@@ -7,7 +7,7 @@ enum type {num = 0, var = 1, oper = 2};
 
 enum op {add = '+', sub = '-', mul = '*', divi = '/'};
 
-struct TreeNode {
+struct Node {
 
     enum type TYPE;
 
@@ -15,9 +15,9 @@ struct TreeNode {
     char varvalue;
     enum op value;
 
-    TreeNode *left = NULL;
-    TreeNode *right = NULL;
-    TreeNode *parent = NULL;
+    Node *left = NULL;
+    Node *right = NULL;
+    Node *parent = NULL;
 };
 
 
@@ -27,11 +27,11 @@ int getsize (char *fileinput);
 
 int process_buffer (char *buf, int size);
 
-TreeNode* create_node (TreeNode *parentnode, TreeNode *node, char *newdata);
+Node* create_node (Node *parentnode, Node *node, char *newdata);
 
-void fill_node_value (TreeNode *node, char *newdata);
+void fill_node_value (Node *node, char *newdata);
 
-TreeNode* readtree (char *buf, TreeNode *root, int *index);
+Node* readtree (char *buf, Node *root, int *index);
 
 #define varlen 123
 
@@ -61,7 +61,7 @@ int main() {
 
     int index = startindex;
 
-    TreeNode *root = NULL;
+    Node *root = NULL;
 
     root = readtree (buf, root, &index);
 
@@ -135,9 +135,9 @@ int process_buffer (char* buf, int size) {
 
 
 
-TreeNode* create_node (TreeNode *parentnode, TreeNode *node, char *newdata) {
+Node* create_node (Node *parentnode, Node *node, char *newdata) {
 
-    //TreeNode *node = (TreeNode *) calloc (1, sizeof (TreeNode));
+    //Node *node = (Node *) calloc (1, sizeof (Node));
 
     fill_node_value (node, newdata);
 
@@ -165,7 +165,7 @@ TreeNode* create_node (TreeNode *parentnode, TreeNode *node, char *newdata) {
 
 
 
-void fill_node_value (TreeNode *node, char *newdata) {
+void fill_node_value (Node *node, char *newdata) {
 
     if (*newdata <= 'z' && *newdata >= 'a') {
 
@@ -179,14 +179,6 @@ void fill_node_value (TreeNode *node, char *newdata) {
     else if (*newdata == '+' || *newdata == '-' || *newdata == '*' || *newdata == '/') {
 
         node -> TYPE = oper;
-
-//        if (*newdata == '+') node -> value = add;
-//
-//        else if (*newdata == '-') node -> value = sub;
-//
-//        else if (*newdata == '*') node -> value = mul;
-//
-//        else if (*newdata == '/') node -> value = divi;
 
         node -> value = (op) *newdata;
     }
@@ -205,9 +197,9 @@ void fill_node_value (TreeNode *node, char *newdata) {
 
 
 
-TreeNode* readtree (char *buf, TreeNode *root, int *index) {
+Node* readtree (char *buf, Node *root, int *index) {
 
-    TreeNode *node = (TreeNode *) calloc (1, sizeof (TreeNode));
+    Node *node = (Node *) calloc (1, sizeof (Node));
 
     (*index)++;
 

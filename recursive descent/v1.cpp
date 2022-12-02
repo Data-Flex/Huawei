@@ -38,6 +38,10 @@ int main() {
 
     s = buf;
 
+    for (int i = 0; i < size; i++) printf("%d ", buf[i]);
+
+    printf ("\n");
+
     double num = GetG (s);
 
     printf ("%f\n", num);
